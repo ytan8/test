@@ -1,0 +1,23 @@
+drop table TODO if exists;
+drop table registration if exists;
+drop table student if exists;
+drop table course if exists;
+DROP SEQUENCE TODO_SEQUENCE_ID if exists;
+
+
+CREATE TABLE student(studentID INT PRIMARY KEY,name VARCHAR(255),dob DATE,email VARCHAR(255),address VARCHAR(255));
+CREATE TABLE TODO (id INT PRIMARY KEY, username VARCHAR(255), description VARCHAR(255)
+, target_date DATE, is_done BOOLEAN);
+CREATE SEQUENCE TODO_SEQUENCE_ID START WITH (select max(ID) + 1 from TODO);
+CREATE TABLE course(courseID INT PRIMARY KEY,name VARCHAR(255),description VARCHAR(255),available_semster VARCHAR(255),credit VARCHAR(255));
+
+CREATE TABLE registration(
+	courseID INT NOT NULL, 
+	studentID INT NOT NULL, 
+	semester VARCHAR(255), 
+	status VARCHAR(255), 
+	register_date DATE, 
+	target_date DATE, 
+	PRIMARY KEY (courseID,studentID),
+	FOREIGN KEY (courseID) REFERENCES course(courseID),
+	FOREIGN KEY (studentID) REFERENCES student(studentID));

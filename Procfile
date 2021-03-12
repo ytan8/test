@@ -1,0 +1,1 @@
+web: java -war target/restful-web-services.war
